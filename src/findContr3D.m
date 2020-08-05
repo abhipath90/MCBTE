@@ -1,9 +1,12 @@
 function [isContr, len] = findContr3D(x0,y0,z0,x1,y1,z1,Xpt,Ypt,Zpt)
+
+    %{
+      This method calculates if the particle trajectory intersects with the current spatial cell and calculates the length of the trajectory inside the spatial cell
+      
+    %}
+    
 isContr=0;
 len=0;
-% X_pt = [X-Dx/2; X+Dx/2];
-% Y_pt = [Y-Dy/2; Y+Dy/2];
-% Z_pt = [Z-Dz/2; Z+Dz/2];
 
 tx = (Xpt-x0)./(x1-x0);
 ty = (Ypt-y0)./(y1-y0);

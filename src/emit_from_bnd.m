@@ -1,5 +1,11 @@
 function [psign,Vx,Vy,Vz,x0,y0,z0] = emit_from_bnd(jj,Pres_index,Props,Out_bnd_data,Normals,speed,Teq)
 
+    %{
+      This method assigns initial properties to a computational particle when it is emitted from one of the prescribed boundary
+      'jj' tells information about which boundary the particle will originate from      
+    %}
+    
+    
 % jj is the relative index of origination boundary among Prescribed boundaries.
 % Pres_index stores indices of all the prescribed boundaries
     
@@ -7,6 +13,7 @@ function [psign,Vx,Vy,Vz,x0,y0,z0] = emit_from_bnd(jj,Pres_index,Props,Out_bnd_d
     R1 = rand();
     R2 = rand();
     
+    % calculating initial location of particle
     switch origin
       
       case 1
@@ -49,8 +56,8 @@ function [psign,Vx,Vy,Vz,x0,y0,z0] = emit_from_bnd(jj,Pres_index,Props,Out_bnd_d
     
     Tbc = Props(jj,2);    
     
+    % Calculating initial travelling directions 
     Theta = 2*pi()*rand();
-    %reference http://corysimon.github.io/articles/uniformdistn-on-sphere/
     U = rand();
     cos_phi = sqrt(U);
     sin_phi = sqrt(1-U);

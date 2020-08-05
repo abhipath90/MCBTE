@@ -1,11 +1,11 @@
 function [Data_out, Impurity]=Load_Mat_data(Teq,Mat_data)
     %{
+      Reads material data and identifies if impurity scattering is to be considered separately
       The source of material properties that we have contains following two possible format
       1) Either 6 columns with Omega,DOS,Velocity,dOmega,tau_inv,tau,polarization format
       2) Or 4 columns with Omega, Velocity, tau, specific heat
       If impurity scattering times are specified, they will be listed in an additional column in the end.
-      Both are calculated at 300K temperature so need to adjust for desired temperature
-      
+    
     %}
     
             % define reduced Planck constant and Boltzmann constant
@@ -35,17 +35,17 @@ function [Data_out, Impurity]=Load_Mat_data(Teq,Mat_data)
         Dom = Mat_data(:,4); % Delta frequencies
         tau = Mat_data(:,5); % relaxation times
         de_dT = (hbar*F/Teq).^2/boltz.*exp(hbar*F/boltz/Teq)./(exp(hbar*F/boltz/Teq)-1).^2; %derivative of Bose-Einstein
+        
+        % Adjustment to heat capacity based on temperature
         C_data = SD.*Dom.*de_dT;
       case 2
         F = Mat_data(:,1);
         V = Mat_data(:,2);
         tau = Mat_data(:,3);
-        C_data = Mat_data(:,4);        
-        % Although an adjustment needs to be applied to relaxation
-        % time as well but for now it has not been done. For more
-        % sophisticated data available at different temperature
-        % this adjustement won't even be required.
         
+        % No adjustment to heat capacity is performed for DFT data, it is assumed that data is provided with correct values.
+        % Additional utility is provided for such adjustment.
+        C_data = Mat_data(:,4);                
       otherwise
         fprintf(2,"Unrecognized material data input file format. Please see the text file again \n");
     end % switch type
@@ -62,22 +62,6 @@ function [Data_out, Impurity]=Load_Mat_data(Teq,Mat_data)
     end % if(~strcmpi(Impurity,
     
     Data_out = [F,V,tau,C_data,tau_im];
-    end % function [dataSi]=Load_Mat_data(Teq)
+
+end % function [dataSi]=Load_Mat_data(Teq)
     
-    
-    %{
-            % Calculating heat capacity
-        % in high temperature limit C=3*kB
-        Ref_temp = 5000; % 5000K as high temperature limit
-        X_hw_ref = hbar*F/(boltz*REf_temp);
-        e_X_ref = exp(X_hw);
-        C_data_ref = fact*boltz*(X_hw.^2).*e_X./(e_X-1).^2;
-        %The factor required to represent finite
-        % volume represented by mesh in q space while calculating
-        % DFT data
-        fact =  3*boltz/sum(C_data_ref);
-        %Calculating adjusted data for modal heat capacity
-        X_hw = hbar*F/(boltz*Teq);
-        e_X = exp(X_hw);
-        C_data = fact*boltz*(X_hw.^2).*e_X./(e_X-1).^2;
-    %}

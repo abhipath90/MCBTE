@@ -1,5 +1,11 @@
 function [new_regions, num] = refine_region(region,order)
 
+    %{
+      This method subdivided spatial cells into smaller ones based on the order specified
+      it returns new_regions and num of new regions created.
+      
+    %}
+    
 % Adding this part to deal with fully defined regions specified with order
 % 0
 if(order==0)
@@ -26,7 +32,7 @@ else
         % return refined regions with num=8
         new_regions = subreg;
         num=8;
-    else
+    else % recursive call
         % call the function with order-1
         % collect the regions and num
         num = 8^order;

@@ -1,5 +1,9 @@
 function [frac_in, hit_bnd_in, scat_type_in,isReject] = Interact_in(x0,y0,x1,y1,Xpt,Ypt,Prop_plane_in,Normals)
-% Boundaries are arranged as Y_low;X_high;Y_high;X_low
+
+    %{
+      This method checks for interaction of particle trajectory with internal boundaries
+      It returns 'frac_in', the fraction of trajectory that is inside the domain after curtailment due to boundary interaction
+    %}
 isReject = false;
 time = [[1;2;3;4],100*ones(4,1)];
 tx = (Xpt-x0)./(x1-x0);

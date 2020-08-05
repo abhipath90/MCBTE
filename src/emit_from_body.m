@@ -1,15 +1,21 @@
 function [psign,Vx,Vy,Vz,x0,y0,z0] = emit_from_body(jj,Source_data,Detector,speed)
+
+    %{
+      This method assigns initial properties to the particle when it originates from body source (Thermal gradient)
+            
+    %}
     
     [noDetect,~] = size(Detector);
     psign = sign(rand()-0.5); % particle can have positive or negative sign equally likely
-                                          % finding random location in the domain
+
+    % finding random location in the domain
     cell = randi(noDetect);
     x0 = Detector(cell,1) + rand()*(Detector(cell,2)-Detector(cell,1));
     y0 = Detector(cell,3) + rand()*(Detector(cell,4)-Detector(cell,3));
     z0 = Detector(cell,5) + rand()*(Detector(cell,6)-Detector(cell,5));
 
+    % selecting initial travelling direction
     Theta = 2*pi()*rand();
-    %reference http://corysimon.github.io/articles/uniformdistn-on-sphere/
     U = rand();
     cos_phi = sqrt(U);
     sin_phi = sqrt(1-U);
