@@ -1,4 +1,12 @@
 # MCBTE
+
+ MCBTE solves linearized Boltzmann transport equation for phonons in three-dimensional domain using variance-reduces Monte Carlo simulation.
+
+
+
+
+
+
 The code is tested on Matlab/R2019b and compatibility with older version is not guaranteed.
 Example problem are provided in the directory 'example_input_files'.
 
