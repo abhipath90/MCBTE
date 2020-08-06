@@ -22,13 +22,13 @@ We provide input files in 'example_input_files' directory for selected example p
 
 * **1D_transient:** Simulates quasi-ballistic heat transport in a 1D rod of length 100 nm for a constant temperature gradient. Here phonon mean free path is comparable to the domain size.
 
-* **nanomesh:** Calculates the thermal conductivity of a periodic nanomesh structure under steady-state conditions. In input files, the equilibrium temperature is 300K but can be modified in Sim_param.txt to obtain thermal conductivity as a function of temperature.
+* **nanomesh:** Calculates the thermal conductivity of a periodic nanomesh structure under steady-state conditions. In input files, the equilibrium temperature is 300 K but can be modified in Sim_param.txt to obtain thermal conductivity as a function of temperature.
 
-* **nanomesh_accumu_2THz:** This example illustrates how easily the source code can be edited to suit the unique requirements of a particular analysis. Here, we solve for the same nanomesh structure described above with an additional constraint that the long-wavelength phonons (< 2THz) scatter differently from the nanomesh boundaries in comparison to > 2THz phonons. We make a one-line change in the BTE_solution_3D.m to account for this change.
+* **nanomesh_accumu_2THz:** This example illustrates how easily the source code can be edited to suit the unique requirements of a particular analysis. Here, we solve for the same nanomesh structure described above with an additional constraint that the long-wavelength phonons (< 2 THz) scatter differently from the nanomesh boundaries in comparison to > 2 THz phonons. We make a one-line change in the BTE_solution_3D.m to account for this change.
 
-* **thin_film_100nm_ref:** Calculates the thermal conductivity of a 100nm thin film of Si at 300K.
+* **thin_film_100nm_ref:** Calculates the thermal conductivity of a 100 nm thin film of Si at 300 K.
 
-* **thin_film_100nm_DFT:** This example illustrates the integration of code with first-principles density functional theory (DFT) simulations. The thermal conductivity of 100 nm Si thin film is calculated at 300K. 
+* **thin_film_100nm_DFT:** This example illustrates the integration of code with first-principles density functional theory (DFT) simulations. The thermal conductivity of 100 nm Si thin film is calculated at 300 K. 
 
 ## Utilities
 'utils' directory contains 'modal_heat_capacity.m' file, which calculates the heat capacity for a given phonon frequency, density, and atomic mass. This is useful when using phonon frequency, group velocity, and relaxation times calculated from first-principles DFT calculations.
