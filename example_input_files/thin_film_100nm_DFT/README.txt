@@ -15,7 +15,7 @@ Measure_times.txt is empty since this is a steady-state simulation.
 
 Out_bnd.txt contains the extents of the domain in x, y, and z axes.
 
-Sim_param.txt lists the simulation parameters. We take N = 1000000 computational particles, number of maximum scattering event = 20, the volume of domain = 10e-22m^3 and the equilibrium temperature = 300 K.
+Sim_param.txt lists the simulation parameters. We take N = 1000000 computational particles, number of maximum scattering event = 20, the volume of domain = 10e-22 m^3 and the equilibrium temperature = 300 K.
 
 Thermal_gradient.txt specifies the pair of boundaries (1,3) and the thermal gradient vector parallel to the vector connecting these boundaries.
 
