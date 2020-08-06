@@ -1,10 +1,10 @@
 function [Data_out, Impurity]=Load_Mat_data(Teq,Mat_data)
     %{
-      Reads material data and identifies if impurity scattering is to be considered separately
-      The source of material properties that we have contains following two possible format
-      1) Either 6 columns with Omega,DOS,Velocity,dOmega,tau_inv,tau,polarization format
-      2) Or 4 columns with Omega, Velocity, tau, specific heat
-      If impurity scattering times are specified, they will be listed in an additional column in the end.
+      Reads the material data and identifies if impurity scattering is to be considered separately.
+      Two possible input formats:
+      1) Either 6 columns with Omega, DOS, Velocity, dOmega, tau_inv, tau, and polarization
+      2) Or 4 columns with Omega, Velocity, tau, and specific heat
+      If impurity scattering relaxation times are specified, they will be listed in an additional column in the end.
     
     %}
     
