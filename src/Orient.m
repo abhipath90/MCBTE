@@ -1,8 +1,8 @@
 function R = orient(ref, dest)
 
-% this code generates roation matrix to rotate a vector ref to vector dest
+% This code generates the rotation matrix to rotate a vector ref to vector dest
 % This is used many times to orient the velocity vector appropriately when
-% emmited or diffusively reflected from a plane
+% emitted or diffusively reflected from a plane
 % WORKS FOR ANY DIMENSION
 
 % This procedure only works when ref~=-(dest);
