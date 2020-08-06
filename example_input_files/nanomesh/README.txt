@@ -1,24 +1,23 @@
-This example simulates steady state heat trasnfer in a nanomesh to calculate its thermal condictivity at 300K. We choose a 3D unit-cell lengths 34nm, 34nm and 22nm in x, y and z respectively. we apply periodic conditions in x and y directions and diffusive reflection on walls at z =0 and z =22nm.
-Heat conduction happens along y direction under the influence of applied thermal gradient of 0.1K/34nm =2.94e6 K/m in y direction. The square holes of sides 11nm in x and y direction and through the thickness in z direction is at the center of unit-cell. The boundaries of internal holes are treated as diffusive mirror.
+This example simulates the steady-state heat trasnfer in a periodic nanomesh structure to calculate its thermal condictivity at 300K. We choose a 3D unit-cell of length 34 nm, 34 nm and 22 nm along x, y, and z directions, respectively. We apply periodic boundary conditions in x and y directions and diffusely reflective boundary condition on boundaries at z = 0 and z = 22 nm.
+The thermal gradient of 0.1/34 = 2.94e6 K/m is applied in the y-direction. Heat conduction is along the y-direction. The square pores of 11 nm length in the x-y plane are drilled through the thickness, i.e.,  z-direction. The boundaries of pore are treated as diffusively reflective.
 
 INPUT DESCRIPTION
 
-Boundary_prop.txt defines properties of all the 10 boundaries: 6 outer boundaries followed by 4 internal boundaried from hole. The periodic boudaries are specified with translational vector and Diffusive boundaries are described with their degree of specularity =0.
+Boundary_prop.txt defines the properties of all 10 boundaries - 6 outer boundaries followed by 4 internal boundaries from the pore. The periodic boudaries are specified with a translational vector and diffusive boundaries are specified by taking the degree of specularity = 0.
 
-In_bnd.txt contains definition of internal boundaries by specifying their starting and ending (x,y) coordinates followed by the normal pointing inward to the simulation domain.
+In_bnd.txt defines the internal boundaries (boundaries of a pore) by specifying their start and end x and y coordinates followed by the normal pointing inward in the simulation domain.
 
-mat_data.txt contains material properties of Si at room temperature. It has Frequency (rad/s), Density of state (s/rad m^3), group velocity (m/s), frequency bin size (rad/s), realaxation time (s) and polarization the same order. Impurity scattering relaxation times are specified separatly in an additional column in the end.
+mat_data.txt contains material properties of Si at 300 K -- Phonon frequency (rad/s), the density of state (s/rad m^3), group velocity (m/s), frequency bin size (rad/s), relaxation time (s), and polarization in the same order. Impurity scattering relaxation times are specified separatly in an additional column in the end.
 
-Measure_regions.txt contains 8 regions created by extending the planes defined by internal hole boundaries. Each region is assigned a degree of refinement 1, and thus will be subdivided into 8 equal spatial cells. Total number of spatial cells will be 8*8 =64 at which flux and temperature data will be reported
+Measure_regions.txt contains 8 regions created by extending the planes defined by the square pore boundaries. Each region is assigned a degree of refinement = 1; hence is subdivided into 8 equal spatial cells. Total number of spatial cells are 8*8 =64 at which the flux and temperature data is calculated.
 
-Measure_times.txt is empty as this is a steady state simulation.
+Measure_times.txt is empty since this is a steady-state simulation.
 
-Out_bnd.txt contains the extents of the domain in all coordianted axes.
+Out_bnd.txt contains the extents of the domain in x, y, and z axes.
 
-Sim_param.txt contains N=1000000, number of maximum scattering event = 20, volume of the domain = 2.277e-23 m^3 and equilibrium temperature = 300K.
+Sim_param.txt lists the simulation parameters. We take N = 1000000 computational particles, number of maximum scattering event = 20, the volume of domain = 2.277e-23 m^3 and the equilibrium temperature = 300 K.
 
-Thermal_gradient.txt contains the pair of boundaries (1,3) and the thermal gradient vector along those boundaries.
-
+Thermal_gradient.txt specifies the pair of boundaries (1,3) and the thermal gradient vector parallel to the vector connecting these boundaries.
 
 
 OUTPUT DESCRIPTION
@@ -32,20 +31,19 @@ Temperature output T*.txt will have the same format as Q*.txt but it will contai
 
 THERMAL CONDUCTIVITY CALCULATION
 
-Thermal conductivity of the nanomesh at 300K is calculated in matlab as
+Thermal conductivity of the periodic nanomesh structure at 300K is calculated using additional two lines of code as follows:
 Qy = mean(sum(load('Qy300.txt'),2));
 kappa = abs(Qy/2.94e6);
-
 
 *******************************************************************************************************
 INSTRUCTION TO RUN THE PROGRAM
 
-Case 1: Running on single processor
-Include the 'src' directory in the PATH variable or copy all the file from 'src' to directory containing input files.
-Run the file 'BTE_solution_3D.m' from GUI or commandline.
+Case 1: Running on a single processor
+Include the 'src' directory in the PATH variable or copy all the files from 'src' to the directory containing input files.
+Run the file 'BTE_solution_3D.m' from GUI or command-line.
 
-Case 2: Running on multiple processors on single computer (Shared memory)
+Case 2: Running on multiple processors on a single computer (Shared memory)
 Use example instructions in Single_node_multiple_proc.m provided in the directory.
 
 Case 3: Running on multiple processors on multiple nodes (Distributed memory)
-Use example instructions in Distributed_computing.m provided in the directory
+Use example instructions in Distributed_computing.m provided in the directory.
