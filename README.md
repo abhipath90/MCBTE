@@ -1,15 +1,19 @@
 # MCBTE
 ## Introduction
- MCBTE solves linearized Boltzmann transport equation for phonons in three-dimensional domain using variance-reduces Monte Carlo simulation. The code is written in MATLAB's distributed computing framework and scale almost linearly with problem size. The open source code is suitable for making small changes to the code to suit the problem that is being solved. The package contains following directories
+ MCBTE solves linearized Boltzmann transport equation for phonons in three-dimensional domain using variance-reduces Monte Carlo simulation. The code is written in MATLAB's distributed computing framework and scale almost linearly with problem size. The open source code can be modified easily to adapt for the unique nature of any particular problem. The package contains following directories
 * 'src' contains the source-code which is portable and tested on MATLAB/R2019b for serial and share-memory parallel computations. For distributed computing the code is tested on MATLAB/R2017b.
 * 'example_input_files' contains few examples elucidating capabilities of the code. These are described in more details below.
 * 'utils' contains useful utilities that are not part of the source codes but can be useful in preparation of input data or analysis of raw data.
 
 ## Features
+* 3D geometry domain is simulated.
+* Simulation of periodic nanostructures using periodic boundary conditions and external thermal gradient applied on unit-cell.
+* 1D and 2D problems can be modeled using appropriate boundary conditions, such as periodic boundaries, in two and one coordinate directions respectively.
 * Both transient and steady-state simulations can be performed.
 * Material data can be used that is derived from empirical relations or obtained from DFT calculation
 * Space- and time-resolved output of heat flux and temperature deviation from equilibrium for transient simulations
-* Frequency-resolved contribution to heat flux and temperature deviation from equilibrium for steady-state simulations
+* Frequency-resolved output of contribution to heat flux and temperature deviation from equilibrium for steady-state simulations
+* The code is extensively tested against available analytical/computational/theoretical results in literature.
 
 
 ## Supplementary examples
