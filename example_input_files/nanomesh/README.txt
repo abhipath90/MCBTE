@@ -7,7 +7,7 @@ Boundary_prop.txt defines the properties of all 10 boundaries - 6 outer boundari
 
 In_bnd.txt defines the internal boundaries (boundaries of a pore) by specifying their start and end x and y coordinates followed by the normal pointing inward in the simulation domain.
 
-mat_data.txt contains material properties of Si at 300 K -- Phonon frequency (rad/s), the density of state (s/rad m^3), group velocity (m/s), frequency bin size (rad/s), relaxation time (s), and polarization in the same order. Impurity scattering relaxation times are specified separately in an additional column in the end.
+mat_data.txt contains material properties of Si at 300 K -- Phonon frequency (rad/s), the density of states (s/rad m^3), group velocity (m/s), frequency bin size (rad/s), relaxation time (s), and polarization in the same order. Impurity scattering relaxation times are specified separately in an additional column in the end.
 
 Measure_regions.txt contains 8 regions created by extending the planes defined by the square pore boundaries. Each region is assigned a degree of refinement = 1; hence is subdivided into 8 equal spatial cells. The total number of spatial cells is 8*8 =64 at which the flux and temperature data is calculated.
 
