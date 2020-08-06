@@ -1,15 +1,15 @@
-This example simulates the steady-state heat trasnfer in a periodic nanomesh structure to calculate its thermal condictivity at 300K. We choose a 3D unit-cell of length 34 nm, 34 nm and 22 nm along x, y, and z directions, respectively. We apply periodic boundary conditions in x and y directions and diffusely reflective boundary condition on boundaries at z = 0 and z = 22 nm.
-The thermal gradient of 0.1/34 = 2.94e6 K/m is applied in the y-direction. Heat conduction is along the y-direction. The square pores of 11 nm length in the x-y plane are drilled through the thickness, i.e.,  z-direction. The boundaries of pore are treated as diffusively reflective.
+This example simulates the steady-state heat transfer in a periodic nanomesh structure to calculate its thermal conductivity at 300K. We choose a 3D unit-cell of length 34 nm, 34 nm, and 22 nm along x, y, and z directions, respectively. We apply periodic boundary conditions in x and y directions and diffusely reflective boundary conditions on boundaries at z = 0 and z = 22 nm.
+The thermal gradient of 0.1/34 = 2.94e6 K/m is applied along the y-direction. Heat conduction is along the y-direction. The square pores of 11 nm length in the x-y plane are drilled through the thickness, i.e.,  z-direction. The boundaries of pore are treated as diffusively reflective.
 
 INPUT DESCRIPTION
 
-Boundary_prop.txt defines the properties of all 10 boundaries - 6 outer boundaries followed by 4 internal boundaries from the pore. The periodic boudaries are specified with a translational vector and diffusive boundaries are specified by taking the degree of specularity = 0.
+Boundary_prop.txt defines the properties of all 10 boundaries - 6 outer boundaries followed by 4 internal boundaries from the pore. The periodic boundaries are specified with a translational vector and diffusive boundaries are specified by taking the degree of specularity = 0.
 
 In_bnd.txt defines the internal boundaries (boundaries of a pore) by specifying their start and end x and y coordinates followed by the normal pointing inward in the simulation domain.
 
-mat_data.txt contains material properties of Si at 300 K -- Phonon frequency (rad/s), the density of state (s/rad m^3), group velocity (m/s), frequency bin size (rad/s), relaxation time (s), and polarization in the same order. Impurity scattering relaxation times are specified separatly in an additional column in the end.
+mat_data.txt contains material properties of Si at 300 K -- Phonon frequency (rad/s), the density of state (s/rad m^3), group velocity (m/s), frequency bin size (rad/s), relaxation time (s), and polarization in the same order. Impurity scattering relaxation times are specified separately in an additional column in the end.
 
-Measure_regions.txt contains 8 regions created by extending the planes defined by the square pore boundaries. Each region is assigned a degree of refinement = 1; hence is subdivided into 8 equal spatial cells. Total number of spatial cells are 8*8 =64 at which the flux and temperature data is calculated.
+Measure_regions.txt contains 8 regions created by extending the planes defined by the square pore boundaries. Each region is assigned a degree of refinement = 1; hence is subdivided into 8 equal spatial cells. The total number of spatial cells is 8*8 =64 at which the flux and temperature data is calculated.
 
 Measure_times.txt is empty since this is a steady-state simulation.
 
@@ -19,15 +19,13 @@ Sim_param.txt lists the simulation parameters. We take N = 1000000 computational
 
 Thermal_gradient.txt specifies the pair of boundaries (1,3) and the thermal gradient vector parallel to the vector connecting these boundaries.
 
-
 OUTPUT DESCRIPTION
 
-detector_location.txt will contain the location of all the spatial cells in the format x_min, x_max, y_min, y_max, z_min, z_max.
+detector_location.txt lists the location of all spatial cells in the order x_min, x_max, y_min, y_max, z_min, z_max.
 
-Flux output Q*.txt will have each row corresponding to each spatial cell in detector_location.txt and each colomun corresponding to each frequency defined in mat_data.txt. The results are reported as contribution of each phonon mode to the flux at a given spatial cell. Total flux at any spatical cell is calculated by summing up the contribution of all phonons at that location.
+Flux output Q*.txt will have each row corresponding to each spatial cell in the detector_location.txt and each column corresponding to each frequency listed in the mat_data.txt. The output is the contribution of each phonon mode to the flux at a given spatial cell. Total flux at any spatial cell is calculated by summing up the contribution of all phonons at that location.
 
-Temperature output T*.txt will have the same format as Q*.txt but it will contain the deviation of temperature from equilibrium (300K) for each spatial cell for each phonon frequency. Net deviation from equilibrium is calculated by summing up contribution of all phonons in that spatial cell.
-
+Temperature output T*.txt has the same format as Q*.txt but contains the deviation of temperature from the equilibrium (300K) for each spatial cell at each phonon frequency. Net deviation from equilibrium temperature is calculated by summing up the contribution of all phonons in the spatial cell.
 
 THERMAL CONDUCTIVITY CALCULATION
 
