@@ -1,7 +1,7 @@
 function [psign,Vx,Vy,Vz,x0,y0,z0] = emit_from_bnd(jj,Pres_index,Props,Out_bnd_data,Normals,speed,Teq)
 
     %{
-      This method assigns initial properties to a computational particle when it is emitted from one of the prescribed boundary
+      This method assigns initial properties to a computational particle when it is emitted from one of the prescribed boundaries.
       'jj' tells information about which boundary the particle will originate from      
     %}
     
