@@ -8,23 +8,17 @@ function [time]=BTE_solution_3D(~)
     %}
 %% Reading all the input files to pass it to all the workers
 
-% Some simulation costants
-hbar=1.054517e-34; % J s = m^2 kg s-1
-boltz=1.38065e-23; % m2 kg s-2 K-1
+% Defining file names
+File_mat = 'mat_data.txt'; % contains material data
+File_out_bnd = 'Out_bnd.txt'; % The outer extents of the domain 
+File_in_bnd = 'In_bnd.txt'; % Definition of any internal boundaries
+File_bnd_prop = 'Boundary_prop.txt'; % Properties of all the boundaries
+File_measure_reg = 'Measure_regions.txt'; % Regions where output is calculated
+File_thermal_grad = 'Thermal_gradient.txt'; % Thermal gradient source
+File_measure_time = 'Measure_times.txt'; % Measurement times for transient simulation
+File_param = 'Sim_param.txt'; % Other simulation paramters
 
-%% Reading all the input files. Will be passed on later
-    
-% Here are the names of all the files
-File_mat = 'mat_data.txt';
-File_out_bnd = 'Out_bnd.txt';
-File_in_bnd = 'In_bnd.txt';
-File_bnd_prop = 'Boundary_prop.txt';
-File_measure_reg = 'Measure_regions.txt';
-File_thermal_grad = 'Thermal_gradient.txt';
-File_measure_time = 'Measure_times.txt';
-File_param = 'Sim_param.txt'; % Simulation parameters
-
-
+% Reading all the files at the head processor and distributing it to all the workers
 if labindex==1
     %% Reading file if they exist
     Mat_data = ReadFile(File_mat);
@@ -56,14 +50,9 @@ Param = data_sent{8};
 DebugFile = fopen(['Monte_carlo' num2str(labindex) '.out'],'w');
 fprintf(DebugFile, ['Hello! I am ' num2str(labindex) ' of ' num2str(numlabs) '\n']);
 
-%{ 
-Tag: Trajectory
-fileID = fopen(['trajectory' num2str(labindex) '.txt'],'w');
-%}
-
 labBarrier;
 
-% First thing is to read Teq
+% Reading equilibrium/linearization temperature
 Teq = Param(4);
 
 %% Importing material data
@@ -99,14 +88,18 @@ C_data = dataSi(:,4); % Modal heat capacities
 tau_inv = 1./tau; % relaxation rates
 tau_im = dataSi(:,5); % impurity scattering rates
 Nmodes = length(F);
-ktest = sum(C_data.*V.*V.*tau)/3; % testing if the input material parameters make sense
+
+% sanity check for the material data. Theoretical values of thermal conductivity
+ktest = sum(C_data.*V.*V.*tau)/3;
 fprintf(DebugFile,'The material thermal conductivity is %f \n',ktest);
 
-%% Defining domain
+%% Defining geometry domain
 if(isempty(Out_bnd) || strcmp(Out_bnd,File_out_bnd))
     fprintf(DebugFile, 'Outer boundaries are not specified. Please check the input.\n');
     return;
 end % if(isempty(Out_bnd) || strcmp(Out_bnd,
+
+% The outer boundaries are fixed in terms of their orientation. Assigning their normals.
 Normals =  [0,1,0;
             -1,0,0;
             0,-1,0;
@@ -114,6 +107,7 @@ Normals =  [0,1,0;
             0,0,1;
             0,0,-1];
 
+% Reading internal boundaries if they exist
 if(isempty(In_bnd) || strcmp(In_bnd,File_in_bnd))
     fprintf(DebugFile, 'Inner boundaries are not specified. Homogeneous domain\n');
 else
@@ -121,6 +115,7 @@ else
     In_bnd = In_bnd(:,1:4); % keeping only x and y coordinates
 end % if(isempty(In_bnd) || strcmp(In_bnd,
 
+% Reading boundary properties
 if(isempty(Bnd_prop) || strcmp(Bnd_prop,File_bnd_prop))
     fprintf(DebugFile, 'Boundary properties are not specified.\n');
     return;
@@ -128,6 +123,7 @@ else
     Prop_plane = Bnd_prop(:,2:5);
 end % if(isempty(Bnd_prop) || strcmp,
 
+% Reading reagions where output is requested
 if(isempty(Measure_reg) || strcmp(Measure_reg,File_measure_reg))
     fprintf(DebugFile, 'No measurement regions are specified.\n');
     return;
@@ -135,12 +131,9 @@ else
     Region_data = Measure_reg;
 end % if(isempty(Measure_reg) || strcmp(Measure_reg,
 
-   
-%[Out_bnd,In_bnd,Normals,Prop_plane,Region_data] = Get_domain();
-
 [num_bnd,~] = size(Prop_plane);
 
-% reading volume of the domain from the file for now. Will be changed later and calculated
+% reading volume of the domain from the file for now.
 if(isempty(Param) || strcmp(Param,File_param))
     fprintf(DebugFile, 'Error in Simulation paramter file Sim_param.txt.\n');
     return;
@@ -151,8 +144,7 @@ else
 end % if(isempty(vol) || strcmp(vol,
 
 %% Source terms
-% Reading source terms other than prescribed boundaries, such as
-% external thermal gradient, volumentric source.
+% Reading source terms other that isothermal boundaries. For now only thermal gradient is implemented
 
 if(isempty(Thermal_grad) || strcmp(Thermal_grad,File_thermal_grad))
     fprintf(DebugFile, 'No additional source is specified.\n');
@@ -164,8 +156,7 @@ else
     
 end % if(isempty(Thermal_grad) || strcmp(Thermal_grad,
 
-%[num_sources,Source_data] = Get_source();
-
+% Reading measurement times if exist and deciding on 'Steady state' vs 'Transient' simulation
 if(isempty(Measure_time) || strcmp(Measure_time,File_measure_time))
     Type = 'Steady';
      fprintf(DebugFile, 'Either no measurement times are specified or there is an error reading that file.\n Proceeding as Steady state simulation.\n');
@@ -175,6 +166,8 @@ else
     [noTime,~] = size(time_points);
     fprintf(DebugFile, 'Measurement times are found. Proceeding with Transient simulation.\n');
 end % if(isempty(Measure_time) || strcmp(Measure_time,
+
+
     
 %****************************************************************************************************
 % All data is read. Setting up sumulation
@@ -284,26 +277,15 @@ if(strcmpi(Type,'Steady'))
     Qx = zeros(noDetect,Nmodes); % Heat flux x component
     Qy = zeros(noDetect,Nmodes); % Heat flux y component
     Qz = zeros(noDetect,Nmodes); % Heat flux z component
-elseif(strcmpi(Type,'Transient'))
-    
+elseif(strcmpi(Type,'Transient'))    
     T = zeros(noDetect,noTime); % Temperature solutions
     Qx = zeros(noDetect,noTime); % Heat flux x component
     Qy = zeros(noDetect,noTime); % Heat flux y component
     Qz = zeros(noDetect,noTime); % Heat flux z component
-    
 end % if(strcmpi(Type,
-
 
  tic;
 for ii=labindex:numlabs:N % loop over N particles
-
-    %{ 
-      Tag: Trajectory
-      uncomment all comment blocks with this tag to output
-      trajectory
-      Traj = zeros(max_scat*2,9);
-      traj_count = 1;
-    %}
     
     try % for debugging any edge case that is left out
         
@@ -357,13 +339,7 @@ for ii=labindex:numlabs:N % loop over N particles
         scat_type = 0;
         hit_bnd = 0;
         while ~finished
-            
-            %{ 
-              Tag: Trajectory
-            Traj(traj_count,:) = [t0,x0,y0,z0,Vx,Vy,Vz,scat_type,hit_bnd];
-            traj_count = traj_count +1;
-            %}
-            
+                        
             if(strcmpi(Impurity,'yes')) % impurity scattering is included
                 if(mode_change)
                     Delt1 = -tau(mode)*log(1-rand());
@@ -455,7 +431,7 @@ for ii=labindex:numlabs:N % loop over N particles
                 % coordinate planes.
                 
                 try
-                    
+                   
                     % finding the coordinates of the extents of
                     % internal boundaries
                     Xpt = unique(In_bnd(:,1));
@@ -467,10 +443,10 @@ for ii=labindex:numlabs:N % loop over N particles
                     if(isContr && len1~=0) % particle crosses internal boundary
                         [frac_in, hit_bnd_in, scat_type_in,isReject] = Interact_in(x0,y0,x1,y1,Xpt,Ypt,Prop_plane(7:end,1),Normals(7:end,1:2));                      
                                                 
-                        % another piece for debugging
-                        if(isempty(frac_in))
-                            disp('empty variable');
-                        end % if(isempty(frac_in))
+% $$$                         % another piece for debugging
+% $$$                         if(isempty(frac_in))
+% $$$                             disp('empty variable');
+% $$$                         end % if(isempty(frac_in))
                         
                         if(~isReject)
                             xin = x0 + frac_in*(x1-x0);
@@ -526,9 +502,9 @@ for ii=labindex:numlabs:N % loop over N particles
                     Zpt=[Detector(jj,5);Detector(jj,6)];
                     [isContr, len] = findContr3D(x0,y0,z0,x1,y1,z1,Xpt,Ypt,Zpt);
                     
-                    if(isnan(len)) % For debugging
-                        fprintf(DebugFile,'I have got a bad contribution\n');
-                    end % if(isnan(len)) % For debugging
+% $$$                     if(isnan(len)) % For debugging
+% $$$                         fprintf(DebugFile,'I have got a bad contribution\n');
+% $$$                     end % if(isnan(len)) % For debugging
                     
                     if isContr==1
                         Dx = abs(Detector(jj,1)-Detector(jj,2));
@@ -618,7 +594,7 @@ for ii=labindex:numlabs:N % loop over N particles
                 ny = Normals(hit_bnd,2);
                 nz = Normals(hit_bnd,3);
                 
-                if (rand()<spec || F(mode)<(2*pi()*2e12) ) % specular reflection
+                if (rand()<spec || F(mode)<(2*pi()*2e12)) % specular reflection
                     
                     V_new = reflection([Vx;Vy;Vz],[nx;ny;nz]);
                     
@@ -718,20 +694,6 @@ for ii=labindex:numlabs:N % loop over N particles
             
         end % while ~finished
         
-        %{ 
-          Tag: Trajectory
-        Traj(~any(Traj,2),:) = [];
-        fprintf(fileID,'particle id =%d\n',ii);
-        fprintf(fileID,'%9s %9s %9s %9s %9s %9s %9s %9s %9s %9s','Time','x','y','z','Vx','Vy','Vz','scatt', 'bnd');
-        fprintf(fileID,'\n');
-        [len,~] = size(Traj);
-        for jj=1:len
-            for kk=1:9
-                fprintf(fileID,'%12.5e ',Traj(jj,kk));
-            end
-            fprintf(fileID,'\n');
-        end
-        %}
         
     catch e
         fprintf(DebugFile,'Some problem occured in runtime, particel id= %d \n',ii);
