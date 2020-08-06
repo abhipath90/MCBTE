@@ -1,4 +1,9 @@
 function [xout,yout,zout,frac_in,hit_bnd_out,scat_type_out] = Interact_out(x0,y0,z0,x1,y1,z1,Out_bnd_data,plane_type,Normals)
+
+    %{
+      This method checks if particle in its trajectory goes out of the domain. If it does, the curtailed trajectory's end point, the fraction of trajectory inside the domain are reported.
+      It also reads boundary information and assign the type of boundary scattering the particle will go through and the boundary it will scatter from.
+    %}
 X_high = Out_bnd_data(1);
 Y_high = Out_bnd_data(2);
 Z_high = Out_bnd_data(3);
