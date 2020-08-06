@@ -1,21 +1,16 @@
-function [time]=BTE_solution_3D(varargin)
- % if(nargin==0) % no input temperature is assigned
- %     Teq = 300; % setting default value of temperature
- % elseif(nargin==1) % Input temperature is defined
- %     Teq = varargin{1};
- % end % if()
- % labBarrier;
+function [time]=BTE_solution_3D(~)
+    %{
+      This method solves the Boltzmann Transport Equation (BTE) for phonons in three-dimensional (3D) geometries.
+      For running the simulation using distributed computing a dummy input (neglected) and a dummy output (simulation time, again not used) are assigned.
+      Material properties, geometric description, and simulation parameters are supplied using designated text files.
+      By supplying Measure_times.txt, a transient simulation is performed otherwise a steady-state simulation is performed.
+      Output files contain three components of heat flux and deviation of temperature from equilibrium/linearization value.
+    %}
+%% Reading all the input files to pass it to all the workers
 
 % Some simulation costants
 hbar=1.054517e-34; % J s = m^2 kg s-1
 boltz=1.38065e-23; % m2 kg s-2 K-1
-
-%% setting up simulation characteristics
-%Type = 'Steady'; % 'Steady' or 'Transient'
-                 %Impurity = 'Yes'; % 'Yes' or 'No' for considering impurity
-                  % scattering explicitly or not.                                        
-                  %N = 1000000; % number of particles in the simulation
-                  %max_scat = 10;
 
 %% Reading all the input files. Will be passed on later
     
