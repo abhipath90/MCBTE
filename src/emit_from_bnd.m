@@ -73,4 +73,4 @@ function [psign,Vx,Vy,Vz,x0,y0,z0] = emit_from_bnd(jj,Pres_index,Props,Out_bnd_d
     
     psign = sign(Tbc-Teq);
     
-end % function             [psign,
+end % function          
