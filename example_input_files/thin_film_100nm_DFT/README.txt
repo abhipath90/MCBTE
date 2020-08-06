@@ -7,7 +7,7 @@ Boundary_prop.txt defines the properties of all six outer boundaries. The period
 
 In_bnd.txt is empty since there are no internal boundaries
 
-mat_data.txt contains material properties of Si at 300 K obtained from first-principles density functional theory simulations -- Phonon frequency (rad/s), group velocity (m/s), relaxation time (s), and heat capacity (J/m^3K) in the same order.
+mat_data.txt contains material properties of Si at 300 K obtained from first-principles density functional theory simulations (taken from almaBTE database) -- phonon frequency (rad/s), group velocity (m/s), relaxation time (s), and heat capacity (J/m^3K) in the same order.
 
 Measure_regions.txt defines the domain with a degree of refinement = 3, discretizing the domain into 8^3 =512 equal spatial cells for output of the heat flux and temperature.
 
