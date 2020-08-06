@@ -1,7 +1,9 @@
 function [isContr, len] = findContr3D(x0,y0,z0,x1,y1,z1,Xpt,Ypt,Zpt)
 
     %{
-      This method calculates if the particle trajectory intersects with the current spatial cell and calculates the length of the trajectory inside the spatial cell
+      This method calculates if the particle trajectory intersects with 
+      the current spatial cell, and further calculates the length of 
+      the trajectory inside the spatial cell
       
     %}
     
