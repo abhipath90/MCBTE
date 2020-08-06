@@ -16,7 +16,7 @@
 
 
 ## Illustrative examples
-We provide input files in 'example_input_files' directory for selected example problems and instructions to run the code in serial, shared-memory parallel, and distributed-memory parallel modes. A brief description of the example problems is as follows.
+We provide input files in 'example_input_files' directory for selected example problems and instructions to run the code in serial, shared-memory parallel, and distributed-memory parallel modes. A brief description of the example problems is as follows. A more detailed README.txt is provided in each folder.
 
 * **1D_ballistic_transient:** Simulates ballistic heat transport in a 1D rod of length 3000 nm for a constant temperature gradient. Here phonon mean free path is much larger than the domain size.
 
