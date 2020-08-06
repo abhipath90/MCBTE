@@ -1,10 +1,10 @@
 function [time]=BTE_solution_3D(~)
     %{
-      This method solves Boltzmann Transport Equation (BTE) for phonons in three-dimensional (3D) geometries.
+      This method solves the Boltzmann Transport Equation (BTE) for phonons in three-dimensional (3D) geometries.
       For running the simulation using distributed computing a dummy input (neglected) and a dummy output (simulation time, again not used) are assigned.
-      Material properties, geometric description and simulation parameters are supplied using desginanted text files.
-      By supplying Measure_times.txt, a transient simulation is perfomed otherwise a steady state simulation is performed.
-      Output files generates contains three components of heat flux and deviation of temperature from equilibrium/linearization value.
+      Material properties, geometric description, and simulation parameters are supplied using designated text files.
+      By supplying Measure_times.txt, a transient simulation is performed otherwise a steady-state simulation is performed.
+      Output files contain three components of heat flux and deviation of temperature from equilibrium/linearization value.
     %}
 %% Reading all the input files to pass it to all the workers
 
