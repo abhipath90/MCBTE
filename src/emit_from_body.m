@@ -35,4 +35,4 @@ function [psign,Vx,Vy,Vz,x0,y0,z0] = emit_from_body(jj,Source_data,Detector,spee
     Vx=V_new(1); Vy=V_new(2); Vz=V_new(3);
 
     
-end % function [psign,
+end % function
