@@ -31,7 +31,7 @@ Temperature output T*.txt has the same format as Q*.txt but contains the deviati
 
 THERMAL CONDUCTIVITY CALCULATION
 
-Thermal conductivity of the nanomesh at 300K is calculated using additional two lines of code as follows:
+Thermal conductivity of the silicon thin-film at 300K is calculated using additional two lines of code as follows:
 Qy = mean(sum(load('Qy300.txt'),2));
 kappa = abs(Qy/1e7);
 
