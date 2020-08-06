@@ -17,7 +17,7 @@ Measure_times.txt defines the timestamps from t = 0 to t = 13 ns at 5 ps interva
 
 Out_bnd.txt contains the extents of the domain in x, y, and z axes.
 
-Sim_param.txt lists the simulation parameters. We take N = 8000000 computational particles, number of maximum scattering event = 10 (not important here), the volume of domain = 27e-18 m^3, and the equilibrium temperature = 300K.
+Sim_param.txt lists the simulation parameters. We take N = 8000000 computational particles, number of maximum scattering event = 10 (not important here), the volume of domain = 27e-18 m^3, and the equilibrium temperature = 300 K.
 
 Thermal_gradient.txt is empty as there are no periodic boundaries.
 
@@ -28,7 +28,7 @@ detector_location.txt lists the location of all spatial cells in the order x_min
 
 Flux output Q*.txt will have each row corresponding to each spatial cell in the detector_location.txt and each column corresponding to each entry in the Measurement_times.txt
 
-Temperature output T*.txt has the same format as Q*.txt but contains the deviation of temperature from the equilibrium (300K) for each spatial cell at each timestamp.
+Temperature output T*.txt has the same format as Q*.txt but contains the deviation of temperature from the equilibrium (300 K) for each spatial cell at each timestamp.
 
 
 
