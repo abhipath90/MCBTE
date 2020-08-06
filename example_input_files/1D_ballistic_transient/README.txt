@@ -8,7 +8,7 @@ Boundary_prop.txt defines properties of all six boundaries. The periodic boundar
 
 In_bnd.txt is empty as there are no internal boundaries in the domain
 
-mat_data.txt contains material properties Phonon frequency (rad/s), density of state (s/rad m^3), group velocity (m/s), frequency bin size (rad/s), realaxation time (s) and polarization in the same order.
+mat_data.txt contains material properties - phonon frequency (rad/s), density of state (s/rad m^3), group velocity (m/s), frequency bin size (rad/s), realaxation time (s) and polarization in the same order.
 A very large relaxation time (1 sec) for all the frequency is used to simulate the ballistic transport. We take group velocity to be 12360 m/s.
 
 Measure_regions.txt defines the domain with a degree of refinement = 4, discretizing the domain into 8^4 = 4096 equal spatial cells for output of the heat flux and temperature.
