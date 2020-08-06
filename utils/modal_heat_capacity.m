@@ -1,9 +1,9 @@
 %{
-    This utility is to calculate modal heat capacity for each phonon
-    frequency in the material data. input data contains phonon
-    frequencies (rad/s), group velocity (m/s) and realaxation time (s)
-    arranged in 3 coulumns. In the output mat_data.txt fourth column is
-    added that calculates heat capacity for the material at temperature Teq
+    This utility is to calculate the modal heat capacity at each phonon 
+    frequency in the material data. Input data contains phonon
+    frequency (rad/s), group velocity (m/s), and relaxation time (s)
+    listed in 3 columns. In the output mat_data.txt file, a fourth column is
+    added that lists the heat capacity at the equilibrium temperature
 
 %}
 %% Input to the script
