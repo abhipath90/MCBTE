@@ -1,8 +1,8 @@
 function [new_regions, num] = refine_region(region,order)
 
     %{
-      This method subdivided spatial cells into smaller ones based on the order specified
-      it returns new_regions and num of new regions created.
+      This method subdivides spatial cells into smaller ones based on the specified order.
+      It returns new_regions and num of new regions created.
       
     %}
     
