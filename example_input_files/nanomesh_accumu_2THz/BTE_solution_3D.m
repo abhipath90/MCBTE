@@ -512,7 +512,7 @@ for ii=labindex:numlabs:N % loop over N particles
                         Dz = abs(Detector(jj,5)-Detector(jj,6));
                         
                         T(jj,mode) = T(jj,mode) + psign*Eeff*len/C/(Dx*Dy*Dz)/V(mode); % temperature
-                        Qx(jj,mode) = Qx(jj,mode) + psign*Eeff*len*Vx/(V(mode)/(Dx*Dy*Dz)); % heat flux
+                        Qx(jj,mode) = Qx(jj,mode) + psign*Eeff*len*Vx/V(mode)/(Dx*Dy*Dz); % heat flux
                         Qy(jj,mode) = Qy(jj,mode) + psign*Eeff*len*Vy/V(mode)/(Dx*Dy*Dz); % heat flux
                         Qz(jj,mode) = Qz(jj,mode) + psign*Eeff*len*Vz/V(mode)/(Dx*Dy*Dz); % heat flux
                     end % if isContr==1
