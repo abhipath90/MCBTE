@@ -1,0 +1,3 @@
+To unzip 'Example_file.tar.bz2' with .bz2 extension use follwing options with tar on terminal
+
+tar -xjvf Example_file.tar.bz2
