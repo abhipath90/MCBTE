@@ -16,10 +16,10 @@
 
 ## Instructions to run the program
 ### MATLAB implementation
-MATLAB implementation is written using Single Program Multiple Data (SPMD) methodology and requires MATLAB's Parallel Computing Toolbox installed. It can be executed either on a sigle node with multiple processors sharing the memory or on multiple nodes distributed on a cluster. In both the cases 'BTE_solution_3D.m' is called after setting up the simulation environment. In each of the example problems' directory two files are located as an example for both of these techniques. 'Single_node_multiple_proc.m' has a straight forward setup and should run seamlessly after specifying file locations and number of processors available. However, "Distributed_computing.m" is setup for using more than one node on a cluster. It is provided as an example for a specific cluster environment and may require significant changes to run on a different cluster. The data distribution and collection is handled inside the MATLAB code itself and all the data is written to disk in the directory the program is run. Both of these scripts can be run inside MATLAB through GUI or simply called form MATLAB commandline
+MATLAB implementation is written using Single Program Multiple Data (SPMD) methodology and requires MATLAB's Parallel Computing Toolbox installed. It can be executed either on a single node with multiple processors sharing the memory or on multiple nodes distributed on a cluster. In both the cases 'BTE_solution_3D.m' is called after setting up the simulation environment. In each of the example problems' directory two files are located as an example for both of these techniques. 'Single_node_multiple_proc.m' has a straight forward setup and should run seamlessly after specifying file locations and number of processors available. However, "Distributed_computing.m" is setup for using more than one node on a cluster. It is provided as an example for a specific cluster environment and may require significant changes to run on a different cluster. The data distribution and collection is handled inside the MATLAB code itself and all the data is written to disk in the directory the program is run. Both of these scripts can be run inside MATLAB through GUI or simply called form MATLAB command-line
 
 ### Octave implementation
-Octave code provides a serial implementation of the same program for the cases when MATLAB and/or Parallel Computing Toolbox is not available. Currently this implementation can only use one processor at a time. 'BTE_solution_3D.m' can be run from Octave GUI or by using *--persist* keyword on commandline as
+Octave code provides a serial implementation of the same program for the cases when MATLAB and/or Parallel Computing Toolbox is not available. Currently this implementation can only use one processor at a time. 'BTE_solution_3D.m' can be run from Octave GUI or by using *--persist* keyword on command-line as
 
 *octave --persist BTE_solution_3D.m*
 
@@ -36,7 +36,7 @@ We provide input files in 'example_input_files' directory for selected example p
 
 * **thin_film_100nm_ref:** Calculates the thermal conductivity of a 100 nm thin film of Si at 300 K.
 
-* **thin_film_100nm_DFT:** This example illustrates the integration of code with first-principles density functional theory (DFT) simulations. The thermal conductivity of 100 nm Si thin film is calculated at 300 K. 
+* **thin_film_100am_DFT:** This example illustrates the integration of code with first-principles density functional theory (DFT) simulations. The thermal conductivity of 100 nm Si thin film is calculated at 300 K. 
 
 ## Utilities
 'utils' directory contains 'modal_heat_capacity.m' file, which calculates the heat capacity for a given phonon frequency, density, and atomic mass. This is useful when using phonon frequency, group velocity, and relaxation times calculated from first-principles DFT calculations.
