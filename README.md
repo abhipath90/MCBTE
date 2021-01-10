@@ -15,13 +15,7 @@
 * Benchmarked against available analytical/computational/theoretical results in the literature.
 
 ## Instructions to run the program
-### MATLAB implementation
-MATLAB implementation is written using Single Program Multiple Data (SPMD) methodology and requires MATLAB's Parallel Computing Toolbox installed. It can be executed either on a single node with multiple processors sharing the memory or on multiple nodes distributed on a cluster. In both the cases 'BTE_solution_3D.m' is called after setting up the simulation environment. In each of the example problems' directory two files are located as an example for both of these techniques. 'Single_node_multiple_proc.m' has a straight forward setup and should run seamlessly after specifying file locations and number of processors available. However, "Distributed_computing.m" is setup for using more than one node on a cluster. It is provided as an example for a specific cluster environment and may require significant changes to run on a different cluster. The data distribution and collection is handled inside the MATLAB code itself and all the data is written to disk in the directory the program is run. Both of these scripts can be run inside MATLAB through GUI or simply called form MATLAB command-line
-
-### Octave implementation
-Octave code provides a serial implementation of the same program for the cases when MATLAB and/or Parallel Computing Toolbox is not available. Currently this implementation can only use one processor at a time. 'BTE_solution_3D.m' can be run from Octave GUI or by using *--persist* keyword on command-line as
-
-*octave --persist BTE_solution_3D.m*
+The program can be executed either on a single node with multiple processors sharing the same memory using 'Single_node_multiple_proc.m' or on multiple nodes using 'Distributed_computing.m'. Both of the files are available in the 'example_input_files' directory. The MATLAB package requires access to 'Parallel Computing Toolbox' for execution and can be run from GUI or command-line. An open-source alternative, an Octave implementation, is also provided in 'Octave_implementation' directory. The Octave program can either be run from GUI or on command-line using *octave --persist BTE_solution_3D.m*.
 
 ## Illustrative examples
 We provide input files in 'example_input_files' directory for selected example problems and instructions to run the MATLAB code in serial, shared-memory parallel, and distributed-memory parallel modes. The same example problems are provided for Octave implementation separately inside 'Octave_implementation/Octave_example_files'. A brief description of the example problems is as follows. A more detailed README.txt is provided in each folder.
