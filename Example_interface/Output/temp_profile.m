@@ -53,17 +53,17 @@ xlabel('Z-coordinate (nm)');
 ylabel('Temperature (K)');
 saveas(gcf,'temp.fig');
 
-figure(2);
-plot(zpts*1e9,Tpts_modal(:,1)+300);
-hold on;
-for jj=2:col
-    plot(zpts*1e9,Tpts_modal(:,jj)+300);
-end
-set(gca, 'FontSize', font_size);
-set(gca, 'XMinorTick', 'on', 'YMinorTick', 'on');
-xlabel('Z-coordinate (nm)');
-ylabel('Temperature (K)');
-saveas(gcf,'temp_modal.fig');
+%figure(2);
+%plot(zpts*1e9,Tpts_modal(:,1)+300);
+%hold on;
+%for jj=2:col
+%    plot(zpts*1e9,Tpts_modal(:,jj)+300);
+%end
+%set(gca, 'FontSize', font_size);
+%set(gca, 'XMinorTick', 'on', 'YMinorTick', 'on');
+%xlabel('Z-coordinate (nm)');
+%ylabel('Temperature (K)');
+%saveas(gcf,'temp_modal.fig');
 
 
 % 
