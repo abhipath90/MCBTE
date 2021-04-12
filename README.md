@@ -36,6 +36,6 @@ We provide input files in 'example_input_files' directory for selected example p
 'utils' directory contains 'modal_heat_capacity.m' file, which calculates the heat capacity for a given phonon frequency, density, and atomic mass. This is useful when using phonon frequency, group velocity, and relaxation times calculated from first-principles DFT calculations.
 
 ## Contributors
-Abhishek Pathak apathak@buffalo.edu, abhishekpathak9066@gmail.com\
+Abhishek Pathak apathak@buffalo.edu, abhishekpathak9066@gmail.com \
 Avinash Pawnday \
-Dipanshu Bansal dipanshu@iitb.ac.in\
+Dipanshu Bansal dipanshu@iitb.ac.in
