@@ -1,10 +1,19 @@
 # MCBTE
 ## Introduction
- MCBTE solves the linearized Boltzmann transport equation for phonons in three-dimension using a variance-reduced Monte Carlo solution approach. For a detailed description of the formulation and its implementation, please refere to "Pathak *et al.*, "**MCBTE: A variance-reduced Monte Carlo solution of the linearized Boltzmann transport equation for phonons**", http://arxiv.org/abs/2104.03573". The code is written in MATLAB's distributed computing framework and scales linearly with size. The source code can be modified to adapt to new computational studies. The package contains following directories -
+ MCBTE solves the linearized Boltzmann transport equation for phonons in three-dimension using a variance-reduced Monte Carlo solution approach. For a detailed description of the formulation and its implementation, please refere to "Pathak *et al.*, "**MCBTE: A variance-reduced Monte Carlo solution of the linearized Boltzmann transport equation for phonons**", http://arxiv.org/abs/2104.03573, https://doi.org/10.1016/j.cpc.2021.108003". The code is written in MATLAB's distributed computing framework and scales linearly with size. The source code can be modified to adapt to new computational studies. The package contains following directories -
 * 'src' contains the source code which is portable and tested on MATLAB/R2019b for serial and share-memory parallel computations. For distributed computing, the code is tested on MATLAB/R2017b.
 * 'example_input_files' contains few illustrating examples highlighting the capabilities of the code. See below for more details.
 * 'utils' contains useful utilities that are not part of the source code but are useful for the preparation of input data or analysis of raw data.
-
+## How to cite
+https://doi.org/10.1016/j.cpc.2021.108003
+@article{pathak2021mcbte,
+  title={MCBTE: A variance-reduced Monte Carlo solution of the linearized Boltzmann transport equation for phonons},
+  author={Pathak, Abhishek and Pawnday, Avinash and Roy, Aditya Prasad and Aref, Amjad J and Dargush, Gary F and Bansal, Dipanshu},
+  journal={Computer Physics Communications},
+  volume={265},,
+  pages={108003},
+  year={2021},
+  publisher={Elsevier}
 ## Features
 * Simulation of 3D geometry. Modeling of 1D and 2D geometry using appropriate boundary conditions, such as periodic boundaries.
 * Simulation of nanostructures using periodic boundary conditions under a constant thermal gradient.
@@ -35,7 +44,7 @@ We provide input files in 'example_input_files' directory for selected example p
 ## Utilities
 'utils' directory contains 'modal_heat_capacity.m' file, which calculates the heat capacity for a given phonon frequency, density, and atomic mass. This is useful when using phonon frequency, group velocity, and relaxation times calculated from first-principles DFT calculations.
 
-## Contributors
+## Developers
 Abhishek Pathak apathak@buffalo.edu, abhishekpathak9066@gmail.com \
 Avinash Pawnday \
 Dipanshu Bansal dipanshu@iitb.ac.in
