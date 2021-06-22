@@ -10,13 +10,21 @@ https://doi.org/10.1016/j.cpc.2021.108003
 Pathak, A., Pawnday, A., Roy, A. P., Aref, A. J., Dargush, G. F., & Bansal, D. (2021). MCBTE: A variance-reduced Monte Carlo solution of the linearized Boltzmann transport equation for phonons. Computer Physics Communications, 265, 108003.
 
 @article{pathak2021mcbte,
+
   title={MCBTE: A variance-reduced Monte Carlo solution of the linearized Boltzmann transport equation for phonons},
+  
   author={Pathak, Abhishek and Pawnday, Avinash and Roy, Aditya Prasad and Aref, Amjad J and Dargush, Gary F and Bansal, Dipanshu},
+  
   journal={Computer Physics Communications},
-  volume={265},,
+  
+  volume={265},
+  
   pages={108003},
+  
   year={2021},
+  
   publisher={Elsevier}
+  
   }
 ## Features
 * Simulation of 3D geometry. Modeling of 1D and 2D geometry using appropriate boundary conditions, such as periodic boundaries.
